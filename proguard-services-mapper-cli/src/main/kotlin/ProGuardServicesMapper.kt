@@ -1,6 +1,6 @@
-package de.gianttree.proguardservicesmapper.cli
+package com.github.gianttreelp.proguardservicesmapper.cli
 
-import de.gianttree.proguardservicesmapper.common.mapServices
+import com.github.gianttreelp.proguardservicesmapper.common.mapServices
 import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType
 import kotlinx.cli.required

@@ -5,7 +5,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.File;
 
-import static de.gianttree.proguardservicesmapper.common.MappingKt.mapServices;
+import static com.github.gianttreelp.proguardservicesmapper.common.MappingKt.mapServices;
 
 
 @Mojo(

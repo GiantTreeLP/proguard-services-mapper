@@ -1,4 +1,4 @@
-package de.gianttree.proguardservicesmapper.common
+package com.github.gianttreelp.proguardservicesmapper.common
 
 import proguard.obfuscate.MappingProcessor
 

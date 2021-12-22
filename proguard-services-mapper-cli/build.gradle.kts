@@ -3,7 +3,7 @@ plugins {
     kotlin("jvm")
 }
 
-group = parent?.group ?: "de.gianttree"
+group = parent?.group ?: "com.github.gianttreelp"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -17,5 +17,5 @@ dependencies {
 }
 
 application {
-    mainClass.set("de.gianttree.proguardservicesmapper.cli.ProGuardServicesMapperKt")
+    mainClass.set("com.github.gianttreelp.proguardservicesmapper.cli.ProGuardServicesMapperKt")
 }
