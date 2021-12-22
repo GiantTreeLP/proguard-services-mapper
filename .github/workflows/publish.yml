@@ -28,7 +28,7 @@ jobs:
       run: mvn -B package
       working-directory: ./proguard-services-mapper-maven
     
-    - name: Set up Apache Maven Central
+    - name: Set up OSS Sonatype
       uses: actions/setup-java@v2
       with:
         java-version: '11'
@@ -40,7 +40,7 @@ jobs:
         gpg-passphrase: GPG_PASSPHRASE
         settings-path: ${{ github.workspace }}
 
-    - name: Publish to GitHub Packages Apache Maven
+    - name: Publish to OSS Sonatype
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       working-directory: ./proguard-services-mapper-maven
       env:
