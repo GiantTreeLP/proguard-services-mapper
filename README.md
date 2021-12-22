@@ -42,7 +42,7 @@ the [ProGuard Maven plugin](https://wvengen.github.io/proguard-maven-plugin/).
 
 ```xml
 <plugin>
-  <groupId>com.github.gianttreelp.proguardservicesmapper.maven</groupId>
+  <groupId>com.github.gianttreelp.proguardservicesmapper</groupId>
   <artifactId>proguard-service-mapper-maven-plugin</artifactId>
   <version>1.0-SNAPSHOT</version> <!-- Update with the version you want to use, preferably the latest -->
   <executions>
