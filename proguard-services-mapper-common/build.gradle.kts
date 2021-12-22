@@ -4,7 +4,7 @@ plugins {
     `maven-publish`
 }
 
-group = "de.gianttree"
+group = parent?.group ?: "de.gianttree"
 version = "1.0-SNAPSHOT"
 
 repositories {
