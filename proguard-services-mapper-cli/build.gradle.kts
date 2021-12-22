@@ -4,7 +4,7 @@ plugins {
 }
 
 group = parent?.group ?: "com.github.gianttreelp"
-version = "1.0-SNAPSHOT"
+version = parent?.version ?: "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -18,4 +18,21 @@ dependencies {
 
 application {
     mainClass.set("com.github.gianttreelp.proguardservicesmapper.cli.ProGuardServicesMapperKt")
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>(project.name) {
+            from(components["java"])
+        }
+    }
+
+    repositories {
+        mavenLocal()
+    }
 }
