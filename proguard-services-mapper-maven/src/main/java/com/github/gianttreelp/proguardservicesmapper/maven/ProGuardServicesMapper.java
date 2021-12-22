@@ -9,12 +9,18 @@ import java.io.File;
 
 import static com.github.gianttreelp.proguardservicesmapper.common.MappingKt.mapServices;
 
-
+/**
+ *  Maven plugin for ProGuard services mapping.
+ *  <p>
+ *      This plugin maps the services in the META-INF/services directory of a jar file to the corresponding
+ *      obfuscated class names defined by the ProGuard mapping file.
+ *  </p>
+ */
 @Mojo(
         name = ProGuardServicesMapper.ID,
         defaultPhase = LifecyclePhase.PACKAGE
 )
-public class ProGuardServicesMapper extends AbstractMojo {
+public final class ProGuardServicesMapper extends AbstractMojo {
     static final String ID = "map-proguard";
 
     @Parameter(name = "input", required = true)
