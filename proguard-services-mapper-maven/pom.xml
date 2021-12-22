@@ -17,21 +17,19 @@
 
     <licenses>
         <license>
-            <name>GNU LESSER GENERAL PUBLIC LICENSE Version 3</name>
-            <url>
-                https://github.com/GiantTreeLP/proguard-services-mapper/blob/main/LICENSE
-            </url>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
 
     <scm>
         <developerConnection>
-            scm:git:git@github.com:GiantTreeLP/proguard-services-mapper.git
+            scm:git:git@github.com:GiantTreeLP
         </developerConnection>
         <connection>scm:git:git://github.com/GiantTreeLP/proguard-services-mapper.git
         </connection>
-        <url>https://github.com/GiantTreeLP/proguard-services-mapper/tree/main</url>
+        <url>https://github.com/GiantTreeLP/proguard-services-mapper</url>
     </scm>
 
     <properties>
@@ -42,7 +40,7 @@
 
     <developers>
         <developer>
-            <id>gianttree</id>
+            <id>gianttreelp</id>
             <name>Marvin K</name>
             <url>https://github.com/GiantTreeLP</url>
             <email>webmaster@gianttree.de</email>

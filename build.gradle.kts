@@ -35,6 +35,37 @@ subprojects {
 
         val publications: PublicationContainer = extensions.getByType<PublishingExtension>().publications
 
+        publications.withType<MavenPublication>().forEach {
+            it.pom {
+                name.set(project.name)
+                description.set("A utility to map Java services to their obfuscated counterparts.")
+                url.set("https://github.com/GiantTreeLP/proguard-services-mapper")
+                packaging = "jar"
+
+                scm {
+                    connection.set("scm:git:https://github.com/GiantTreeLP/proguard-services-mapper")
+                    developerConnection.set("scm:git:https://github.com/GiantTreeLP")
+                    url.set("https://github.com/GiantTreeLP/proguard-services-mapper")
+                }
+
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://opensource.org/licenses/MIT")
+                        distribution.set("repo")
+                    }
+                }
+
+                developers {
+                    developer {
+                        id.set("gianttreelp")
+                        name.set("Marvin K")
+                        email.set("webmaster@gianttree.de")
+                    }
+                }
+            }
+        }
+
         configure<SigningExtension> {
             useGpgCmd()
             val signingKey =
