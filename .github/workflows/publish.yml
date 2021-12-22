@@ -36,6 +36,7 @@ jobs:
         server-id: ossrh
         server-username: OSSRH_USER
         server-password: OSSRH_PASSWORD
+        settings-path: ${{ github.workspace }}
 
     - name: Publish to GitHub Packages Apache Maven
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
