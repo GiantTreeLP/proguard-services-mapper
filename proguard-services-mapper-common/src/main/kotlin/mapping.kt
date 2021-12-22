@@ -5,10 +5,7 @@ import java.nio.file.*
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
 import java.util.jar.JarOutputStream
-import kotlin.io.path.exists
-import kotlin.io.path.isReadable
-import kotlin.io.path.isRegularFile
-import kotlin.io.path.outputStream
+import kotlin.io.path.*
 import kotlin.random.Random
 import kotlin.random.nextUInt
 
@@ -16,11 +13,12 @@ const val SERVICES_PATH = "META-INF/services/"
 
 fun mapServices(mappingFileName: String, inputFileName: String) {
     val mappingPath = Paths.get(mappingFileName)
-    validatePath(mappingPath)
+    validateInputPath(mappingPath)
     val inputPath = Paths.get(inputFileName)
-    validatePath(inputPath)
+    validateInputPath(inputPath)
     // Temporary output file
     val outputFile = inputPath.resolveSibling("${inputPath.fileName}.${Random.nextUInt()}.jar")
+    validateOutputPath(outputFile)
 
     JarFile(inputPath.toFile()).use { jarFile ->
 
@@ -121,7 +119,7 @@ fun readServices(jarFile: JarFile): List<String> {
     return entries
 }
 
-fun validatePath(path: Path) {
+fun validateInputPath(path: Path) {
     if (!path.exists()) {
         throw IllegalArgumentException("Path $path does not exist")
     }
@@ -130,5 +128,17 @@ fun validatePath(path: Path) {
     }
     if (!path.isReadable()) {
         throw IllegalArgumentException("Path $path is not readable")
+    }
+}
+
+fun validateOutputPath(path: Path) {
+    if (path.exists()) {
+        throw IllegalArgumentException("Path $path already exists")
+    }
+    if (!path.parent.exists()) {
+        throw IllegalArgumentException("Path ${path.parent} does not exist")
+    }
+    if (!path.parent.isDirectory()) {
+        throw IllegalArgumentException("Path ${path.parent} is not a directory")
     }
 }
