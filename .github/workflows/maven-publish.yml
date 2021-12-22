@@ -22,7 +22,8 @@ jobs:
         distribution: 'adopt'
 
     - name: Build with Maven
-      run: mvn -B -Dmaven.multiModuleProjectDirectory=proguard-services-mapper-maven package
+      run: mvn -B package
+      working-directory: ./proguard-services-mapper-maven
     
     - name: Set up Apache Maven Central
       uses: actions/setup-java@v2
@@ -35,6 +36,7 @@ jobs:
 
     - name: Publish to GitHub Packages Apache Maven
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      working-directory: ./proguard-services-mapper-maven
       env:
         OSSRH_USER: ${{ env.OSSRH_USER }}
         OSSRH_PASSWORD: ${{ env.OSSRH_PASSWORD }}
