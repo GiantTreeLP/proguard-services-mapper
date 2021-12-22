@@ -16,7 +16,7 @@ const val SERVICES_PATH = "META-INF/services/"
 
 fun mapServices(mappingFileName: String, inputFileName: String) {
     val mappingPath = Paths.get(mappingFileName)
-    validatePath(mappingPath, true)
+    validatePath(mappingPath)
     val inputPath = Paths.get(inputFileName)
     validatePath(inputPath)
     // Temporary output file
@@ -71,8 +71,13 @@ private fun obfuscateFileContent(
     extractor: MappingExtractor
 ): ByteArray {
     return jarFile.getInputStream(entry).reader().readLines().joinToString("\n") { line ->
-        println("Mapping $line to ${extractor.classMap[line]}")
-        extractor.classMap[line] ?: line
+        val newName = extractor.classMap[line] ?: line
+        if (newName != line) {
+            println("Mapping $line to $newName")
+        } else {
+            println("NOT MAPPING $line")
+        }
+        newName
     }.encodeToByteArray()
 }
 
@@ -116,7 +121,7 @@ fun readServices(jarFile: JarFile): List<String> {
     return entries
 }
 
-fun validatePath(path: Path, readOnly: Boolean = false) {
+fun validatePath(path: Path) {
     if (!path.exists()) {
         throw IllegalArgumentException("Path $path does not exist")
     }
