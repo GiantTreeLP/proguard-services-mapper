@@ -37,6 +37,8 @@ fun mapServices(mappingFileName: String, inputFileName: String) {
             ).buffered()
         ).use { outputStream ->
 
+            outputStream.setLevel(9)
+
             for (entry in jarFile.entries()) {
                 val name = entry.name
                 if (name.startsWith(SERVICES_PATH)) {
