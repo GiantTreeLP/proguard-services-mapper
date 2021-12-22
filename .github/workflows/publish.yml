@@ -20,14 +20,15 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+        cache: gradle
 
     - name: Build with Gradle
       run: ./gradlew clean publish
       env:
-        OSSRH_USER: ${{ env.OSSRH_USER }}
-        OSSRH_PASSWORD: ${{ env.OSSRH_PASSWORD }}
-        GPG_PRIVATE_KEY: ${{ env.GPG_PRIVATE_KEY }}
-        GPG_PASSPHRASE: ${{ env.GPG_PASSPHRASE }}
+        OSSRH_USER: ${{ secrets.OSSRH_USER }}
+        OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+        GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
     - name: Build with Maven
       run: mvn -B package
@@ -38,6 +39,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+        cache: maven
         server-id: ossrh
         server-username: OSSRH_USER
         server-password: OSSRH_PASSWORD
@@ -49,7 +51,7 @@ jobs:
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       working-directory: ./proguard-services-mapper-maven
       env:
-        OSSRH_USER: ${{ env.OSSRH_USER }}
-        OSSRH_PASSWORD: ${{ env.OSSRH_PASSWORD }}
-        GPG_PRIVATE_KEY: ${{ env.GPG_PRIVATE_KEY }}
-        GPG_PASSPHRASE: ${{ env.GPG_PASSPHRASE }}
+        OSSRH_USER: ${{ secrets.OSSRH_USER }}
+        OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+        GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
