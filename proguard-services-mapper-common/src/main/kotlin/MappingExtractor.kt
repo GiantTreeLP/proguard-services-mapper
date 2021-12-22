@@ -1,10 +1,10 @@
-package de.gianttree.proguardservicesmapper
+package de.gianttree.proguardservicesmapper.common
 
 import proguard.obfuscate.MappingProcessor
 
 class MappingExtractor : MappingProcessor {
 
-    internal val classMap = mutableMapOf<ClassName, ObfuscatedClassName>()
+    val classMap = mutableMapOf<ClassName, ObfuscatedClassName>()
 
 
     override fun processClassMapping(className: String, newClassName: String): Boolean {

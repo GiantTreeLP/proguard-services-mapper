@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.6.10"
+    kotlin("jvm")
 }
 
 group = "de.gianttree"
@@ -7,4 +7,8 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+}
+
+dependencies {
+    implementation(kotlin("stdlib"))
 }

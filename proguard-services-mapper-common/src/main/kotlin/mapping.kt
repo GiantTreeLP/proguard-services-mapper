@@ -1,8 +1,5 @@
-package de.gianttree.proguardservicesmapper
+package de.gianttree.proguardservicesmapper.common
 
-import kotlinx.cli.ArgParser
-import kotlinx.cli.ArgType
-import kotlinx.cli.required
 import proguard.obfuscate.MappingReader
 import java.nio.file.*
 import java.util.jar.JarEntry
@@ -12,40 +9,27 @@ import kotlin.io.path.exists
 import kotlin.io.path.isReadable
 import kotlin.io.path.isRegularFile
 import kotlin.io.path.outputStream
+import kotlin.random.Random
+import kotlin.random.nextUInt
 
 const val SERVICES_PATH = "META-INF/services/"
-
-fun main(args: Array<String>) {
-    val parser = ArgParser("proguard-services-mapper")
-    val mappingFileName by parser.option(ArgType.String, "mapping", "m", "Mapping file name").required()
-    val inputFileName by parser.option(ArgType.String, "input", "i", "Input file name").required()
-
-    parser.parse(args)
-    mapServices(mappingFileName, inputFileName)
-}
 
 fun mapServices(mappingFileName: String, inputFileName: String) {
     val mappingPath = Paths.get(mappingFileName)
     validatePath(mappingPath, true)
     val inputPath = Paths.get(inputFileName)
     validatePath(inputPath)
-    val outputFile = inputPath.resolveSibling("${inputPath.fileName}.mapped.jar")
+    // Temporary output file
+    val outputFile = inputPath.resolveSibling("${inputPath.fileName}.${Random.nextUInt()}.jar")
+
     JarFile(inputPath.toFile()).use { jarFile ->
 
         // Read META-INF/services/
-        val services = readServices(jarFile)
-
-        if (services.isEmpty()) {
-            println("No services found in $inputPath. Nothing to do.")
+        if (!scanServices(jarFile, inputPath)) {
             return
         }
-        println("Found ${services.size} services in $inputPath:")
-        services.forEach { println("\t$it") }
 
-        // Read mapping file
-        val reader = MappingReader(mappingPath.toFile())
-        val extractor = MappingExtractor()
-        reader.pump(extractor)
+        val extractor = readMappingFile(mappingPath)
 
         JarOutputStream(
             outputFile.outputStream(
@@ -58,14 +42,9 @@ fun mapServices(mappingFileName: String, inputFileName: String) {
             for (entry in jarFile.entries()) {
                 val name = entry.name
                 if (name.startsWith(SERVICES_PATH)) {
-                    val newName =
-                        extractor.classMap[name.substringAfterLast('/')]?.let {
-                            name.substringBeforeLast('/') + '/' + it
-                        }
+                    val newName = obfuscateFileName(extractor, name)
 
-                    val mappedLines = jarFile.getInputStream(entry).reader().readLines().joinToString("\n") { line ->
-                        extractor.classMap[line] ?: line
-                    }.encodeToByteArray()
+                    val mappedLines = obfuscateFileContent(jarFile, entry, extractor)
 
                     if (newName != null) {
                         println("Mapping $name to $newName")
@@ -84,6 +63,45 @@ fun mapServices(mappingFileName: String, inputFileName: String) {
         }
     }
     Files.move(outputFile, inputPath, StandardCopyOption.REPLACE_EXISTING)
+}
+
+private fun obfuscateFileContent(
+    jarFile: JarFile,
+    entry: JarEntry,
+    extractor: MappingExtractor
+): ByteArray {
+    return jarFile.getInputStream(entry).reader().readLines().joinToString("\n") { line ->
+        println("Mapping $line to ${extractor.classMap[line]}")
+        extractor.classMap[line] ?: line
+    }.encodeToByteArray()
+}
+
+private fun obfuscateFileName(
+    extractor: MappingExtractor,
+    name: String
+): String? {
+    return extractor.classMap[name.substringAfterLast('/')]?.let {
+        name.substringBeforeLast('/') + '/' + it
+    }
+}
+
+private fun scanServices(jarFile: JarFile, inputPath: Path?): Boolean {
+    val services = readServices(jarFile)
+
+    if (services.isEmpty()) {
+        println("No services found in $inputPath. Nothing to do.")
+        return false
+    }
+    println("Found ${services.size} services in $inputPath:")
+    services.forEach { println("\t$it") }
+    return true
+}
+
+private fun readMappingFile(mappingPath: Path): MappingExtractor {
+    val reader = MappingReader(mappingPath.toFile())
+    val extractor = MappingExtractor()
+    reader.pump(extractor)
+    return extractor
 }
 
 fun readServices(jarFile: JarFile): List<String> {
