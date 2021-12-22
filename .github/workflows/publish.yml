@@ -36,6 +36,8 @@ jobs:
         server-id: ossrh
         server-username: OSSRH_USER
         server-password: OSSRH_PASSWORD
+        gpg-private-key: GPG_PRIVATE_KEY
+        gpg-passphrase: GPG_PASSPHRASE
         settings-path: ${{ github.workspace }}
 
     - name: Publish to GitHub Packages Apache Maven
@@ -44,3 +46,5 @@ jobs:
       env:
         OSSRH_USER: ${{ env.OSSRH_USER }}
         OSSRH_PASSWORD: ${{ env.OSSRH_PASSWORD }}
+        GPG_PRIVATE_KEY: ${{ env.GPG_PRIVATE_KEY }}
+        GPG_PASSPHRASE: ${{ env.GPG_PASSPHRASE }}
