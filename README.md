@@ -3,7 +3,7 @@
 [![Maven Package](https://github.com/GiantTreeLP/proguard-services-mapper/actions/workflows/publish.yml/badge.svg)](https://github.com/GiantTreeLP/proguard-services-mapper/actions/workflows/maven-publish.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.gianttreelp.proguardservicesmapper/proguard-services-mapper-common)](https://search.maven.org/artifact/com.github.gianttreelp.proguardservicesmapper/proguard-services-mapper-common)
 [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/com.github.gianttreelp.proguardservicesmapper/proguard-services-mapper-common?server=https%3A%2F%2Foss.sonatype.org)](https://oss.sonatype.org/content/repositories/snapshots/com/github/gianttreelp/proguardservicesmapper/)
-
+[![GitHub stars](https://img.shields.io/github/stars/GiantTreeLP/proguard-services-mapper)](https://github.com/GiantTreeLP/proguard-services-mapper/stargazers)
 
 This is a service mapper for the [ProGuard](https://proguard.sourceforge.io/)
 Java bytecode obfuscator.
