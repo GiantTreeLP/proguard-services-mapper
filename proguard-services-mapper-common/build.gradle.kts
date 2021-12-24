@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    api("com.guardsquare", "proguard-base", "7.2.0-beta4")
+    api("com.guardsquare", "proguard-base", "7.2.0-beta5")
     implementation(kotlin("stdlib-jdk8"))
 }
 
