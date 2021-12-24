@@ -1,7 +1,6 @@
 # ProGuard Service Mapper
 [![GitHub license](https://img.shields.io/github/license/GiantTreeLP/proguard-services-mapper)](https://github.com/GiantTreeLP/proguard-services-mapper/blob/main/LICENSE)
 [![Maven Package](https://github.com/GiantTreeLP/proguard-services-mapper/actions/workflows/publish.yml/badge.svg)](https://github.com/GiantTreeLP/proguard-services-mapper/actions/workflows/maven-publish.yml)
-![GitHub branch checks state](https://img.shields.io/github/checks-status/GiantTreeLP/proguard-services-mapper/main)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.gianttreelp.proguardservicesmapper/proguard-services-mapper-common)](https://search.maven.org/artifact/com.github.gianttreelp.proguardservicesmapper/proguard-services-mapper-common)
 [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/com.github.gianttreelp.proguardservicesmapper/proguard-services-mapper-common?server=https%3A%2F%2Foss.sonatype.org)](https://oss.sonatype.org/content/repositories/snapshots/com/github/gianttreelp/proguardservicesmapper/)
 
