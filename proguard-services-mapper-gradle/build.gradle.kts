@@ -16,15 +16,6 @@ dependencies {
     implementation(project(":proguard-services-mapper-common"))
 }
 
-gradlePlugin {
-    plugins {
-        create("ProguardServicesMapper") {
-            id = "com.github.gianttreelp.proguardservicesmapper.gradle"
-            implementationClass = "com.github.gianttreelp.proguardservicesmapper.gradle.ProguardServicesMapperPlugin"
-        }
-    }
-}
-
 java {
     withJavadocJar()
     withSourcesJar()
