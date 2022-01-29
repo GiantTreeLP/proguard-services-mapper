@@ -6,7 +6,7 @@
 
     <groupId>com.github.gianttreelp.proguardservicesmapper</groupId>
     <artifactId>proguard-services-mapper-maven</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
     <packaging>maven-plugin</packaging>
 
     <name>proguard-services-mapper</name>
@@ -76,7 +76,7 @@
         <dependency>
             <groupId>com.github.gianttreelp.proguardservicesmapper</groupId>
             <artifactId>proguard-services-mapper-common</artifactId>
-            <version>1.1-SNAPSHOT</version>
+            <version>1.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

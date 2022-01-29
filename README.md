@@ -45,7 +45,7 @@ the [ProGuard Maven plugin](https://wvengen.github.io/proguard-maven-plugin/).
 <plugin>
   <groupId>com.github.gianttreelp.proguardservicesmapper</groupId>
   <artifactId>proguard-service-mapper-maven-plugin</artifactId>
-  <version>1.1-SNAPSHOT</version> <!-- Update with the version you want to use, preferably the latest -->
+  <version>1.1</version> <!-- Update with the version you want to use, preferably the latest -->
   <executions>
     <execution>
       <phase>package</phase>
@@ -69,8 +69,10 @@ the [ProGuard Gradle plugin](https://github.com/Guardsquare/proguard).
 ### Example usage in Gradle with the ProGuard Gradle plugin and the Shadow plugin
 
 ```kotlin
-dependencies {
-  classpath("com.github.gianttreelp.proguardservicesmapper:proguard-services-mapper-gradle:1.1-SNAPSHOT")
+buildscript {
+  dependencies {
+    classpath("com.github.gianttreelp.proguardservicesmapper:proguard-services-mapper-gradle:1.1")
+  }   
 }
 
 register<com.github.gianttreelp.proguardservicesmapper.gradle.ProguardServicesMapperTask>("mapServices") {

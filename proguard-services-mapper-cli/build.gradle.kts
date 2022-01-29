@@ -4,7 +4,7 @@ plugins {
 }
 
 group = parent?.group ?: "com.github.gianttreelp"
-version = parent?.version ?: "1.1-SNAPSHOT"
+version = parent?.version ?: "1.1"
 
 repositories {
     mavenCentral()
