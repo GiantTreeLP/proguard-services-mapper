@@ -20,6 +20,8 @@ It consists of the following modules:
   The command line interface.
 * [`proguard-service-mapper-maven`](#proguard-service-mapper-maven):
   The Maven plugin.
+* [`proguard-service-mapper-gradle`](#proguard-service-mapper-gradle):
+  The Gradle plugin.
 
 ## ProGuard Service Mapper CLI
 
@@ -57,4 +59,28 @@ the [ProGuard Maven plugin](https://wvengen.github.io/proguard-maven-plugin/).
     <mapping><!-- The mapping file from ProGuard --></mapping>
   </configuration>
 </plugin>
+```
+
+## ProGuard Service Mapper Gradle
+
+This plugin is intended to be integrated into your Gradle build process and run after
+the [ProGuard Gradle plugin](https://github.com/Guardsquare/proguard).
+
+### Example usage in Gradle with the ProGuard Gradle plugin and the Shadow plugin
+
+```kotlin
+dependencies {
+  classpath("com.github.gianttreelp.proguardservicesmapper:proguard-services-mapper-gradle:1.1-SNAPSHOT")
+}
+
+register<com.github.gianttreelp.proguardservicesmapper.gradle.ProguardServicesMapperTask>("mapServices") {
+  this.dependsOn("proguard")
+  
+  val shadowTask = project.tasks.shadowJar.orNull ?: throw IllegalStateException("No shadow jar task found")
+  
+  this.mappingFile.set(project.buildDir.resolve("mapping.txt"))
+  this.inputFile.set(shadowTask.outputs.files.files.single().let {
+    File(it.path.substringBeforeLast('.') + "-obf." + it.path.substringAfterLast('.'))
+  })
+}
 ```
