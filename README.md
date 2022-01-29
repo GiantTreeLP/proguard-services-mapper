@@ -45,7 +45,7 @@ the [ProGuard Maven plugin](https://wvengen.github.io/proguard-maven-plugin/).
 <plugin>
   <groupId>com.github.gianttreelp.proguardservicesmapper</groupId>
   <artifactId>proguard-service-mapper-maven-plugin</artifactId>
-  <version>1.1</version> <!-- Update with the version you want to use, preferably the latest -->
+  <version>1.2-SNAPSHOT</version> <!-- Update with the version you want to use, preferably the latest -->
   <executions>
     <execution>
       <phase>package</phase>
@@ -71,7 +71,7 @@ the [ProGuard Gradle plugin](https://github.com/Guardsquare/proguard).
 ```kotlin
 buildscript {
   dependencies {
-    classpath("com.github.gianttreelp.proguardservicesmapper:proguard-services-mapper-gradle:1.1")
+    classpath("com.github.gianttreelp.proguardservicesmapper:proguard-services-mapper-gradle:1.2-SNAPSHOT")
   }   
 }
 
