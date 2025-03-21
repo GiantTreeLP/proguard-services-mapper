@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     kotlin("jvm")
     `java-library`
@@ -12,13 +14,23 @@ repositories {
 }
 
 dependencies {
-    api("com.guardsquare", "proguard-base", "7.2.0-beta5")
+    api("com.guardsquare", "proguard-base", "7.6.1")
     implementation(kotlin("stdlib-jdk8"))
 }
 
 java {
     withJavadocJar()
     withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+kotlin {
+    target {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+    }
 }
 
 publishing {

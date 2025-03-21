@@ -13,7 +13,7 @@ subprojects {
     apply(plugin = "maven-publish")
     apply(plugin = "signing")
 
-    project.gradle.projectsEvaluated {
+    project.afterEvaluate {
         configure<PublishingExtension> {
             repositories {
                 maven {
